@@ -10,13 +10,12 @@ public class Character : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //agent = new Miner();
-        //AgentManager.AddAgent(agent);
     }
 
     // Update is called once per frame
     void Update()
     {
+        // update the Finite State Machine
         agent.Update();
     }
 }
