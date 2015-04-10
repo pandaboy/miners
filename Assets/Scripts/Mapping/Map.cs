@@ -4,56 +4,6 @@ using System.Collections;
 
 namespace Mapping
 {
-    public enum TileType
-    {
-        Grass,
-        Tree,
-        Wall,
-        Home,
-        Bank,
-        Pub,
-        Mine
-    }
-
-    public struct Tile
-    {
-        public TileType type;
-        public GameObject obj;
-        public int cost;
-
-        public static int GetCost(TileType tileType)
-        {
-            switch (tileType)
-            {
-                case TileType.Grass: return 1;
-                case TileType.Tree: return -1;
-                case TileType.Wall: return -1;
-                case TileType.Home: return 0;
-                case TileType.Bank: return 0;
-                case TileType.Pub: return 0;
-                case TileType.Mine: return 0;
-            }
-
-            return 0;
-        }
-
-        public static Color GetColor(TileType tileType)
-        {
-            switch(tileType)
-            {
-                case TileType.Grass: return Color.green;
-                case TileType.Tree: return Color.black;
-                case TileType.Wall: return Color.black;
-                case TileType.Home: return Color.blue;
-                case TileType.Bank: return Color.blue;
-                case TileType.Pub: return Color.blue;
-                case TileType.Mine: return Color.blue;
-            }
-
-            return Color.gray;
-        }
-    }
-
     public class Map
     {
         private Tile[,] tiles;
@@ -75,37 +25,10 @@ namespace Mapping
 
         public Map(TileType[,] data)
         {
-            // create the map using the data
-            BuildMap(data);
-        }
-
-        public Tile GetTile(int x, int y)
-        {
-            return tiles[x, y];
-        }
-
-        public int GetTileCost(int x, int y)
-        {
-            return GetTile(x, y).cost;
-        }
-
-        public void SetTile(int x, int y, TileType tileType)
-        {
-            tiles[x, y].type = tileType;
-            tiles[x, y].obj.GetComponent<Renderer>().material.color = Color.red;
-        }
-
-        public void SetTileColor(int x, int y, Color color)
-        {
-            tiles[x, y].obj.GetComponent<Renderer>().material.color = color;
-        }
-
-        private void BuildMap(TileType[,] data)
-        {
             // store dimensions based on array given.
             length = data.GetLength(0);
             width = data.GetLength(1);
-            
+
             // create 2D array
             tiles = new Tile[length, width];
 
@@ -120,6 +43,53 @@ namespace Mapping
                     BuildTile(i, j, data[i, j]);
                 }
             }
+        }
+
+        public Tile GetTile(int x, int y)
+        {
+            return tiles[x, y];
+        }
+
+        public int GetTileCost(int x, int y)
+        {
+            return GetTile(x, y).cost;
+        }
+
+        public void FindTile(TileType tileType, out Tile tile)
+        {
+            tile = new Tile();
+            // go through all the tiles and find the first one with a matching type.
+            // linear search
+            int i = 0, j = 0;
+            for (; i < length; i++)
+            {
+                for (j = 0; j < width; j++)
+                {
+                    if (tiles[i, j].type == tileType)
+                    {
+                        tile = tiles[i, j];
+                        // force break out of outer loop
+                        i = length + 1;
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void SetTile(int x, int y, TileType tileType)
+        {
+            tiles[x, y].type = tileType;
+            tiles[x, y].obj.GetComponent<Renderer>().material.color = Color.red;
+        }
+
+        public void SetTileColor(int x, int y, Color color)
+        {
+            tiles[x, y].obj.GetComponent<Renderer>().material.color = color;
+        }
+
+        public void SetTileColor(Tile tile, Color color)
+        {
+            tile.obj.GetComponent<Renderer>().material.color = color;
         }
 
         private void BuildTile(int x, int y, TileType tileType)
