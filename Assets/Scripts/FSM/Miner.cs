@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using FSM;
-using States;
+using FSM.States;
 
 public class Miner : Agent {
 

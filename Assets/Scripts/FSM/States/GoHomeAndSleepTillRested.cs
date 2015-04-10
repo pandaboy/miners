@@ -3,9 +3,8 @@ using UnityEngine;
 using System.Collections;
 using FSM;
 
-namespace States
+namespace FSM.States
 {
-
     // In this state, the miner goes home and sleeps
     public class GoHomeAndSleepTillRested : State<Miner>
     {
