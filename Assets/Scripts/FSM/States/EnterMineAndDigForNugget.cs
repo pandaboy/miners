@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using FSM;
 
-namespace States
+namespace FSM.States
 {
     public class EnterMineAndDigForNugget : State<Miner>
     {

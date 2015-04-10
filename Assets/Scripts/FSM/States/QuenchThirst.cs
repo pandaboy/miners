@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using FSM;
 
-namespace States
+namespace FSM.States
 {
     // In this state, the miner goes to the saloon to drink
     public class QuenchThirst : State<Miner>
