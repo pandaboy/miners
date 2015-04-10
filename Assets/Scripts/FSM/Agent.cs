@@ -9,14 +9,13 @@ namespace FSM
         private static int nAgents = 0;
 
         private int id;
-        public int Id
+        public int ID
         {
             get { return id; }
             set { id = value; }
         }
 
-        public Agent()
-            : base()
+        public Agent() : base()
         {
             id = nAgents++;
         }

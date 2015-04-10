@@ -11,7 +11,7 @@ namespace States
 
         public override void Enter(Wife minersWife)
         {
-            Debug.Log(minersWife.Id + "Time to do some more housework!");
+            Debug.Log(minersWife.ID + "Time to do some more housework!");
         }
 
         public override void Execute(Wife minersWife)
@@ -19,13 +19,13 @@ namespace States
             switch (rand.Next(3))
             {
                 case 0:
-                    Debug.Log(minersWife.Id + "Moppin' the floor");
+                    Debug.Log(minersWife.ID + "Moppin' the floor");
                     break;
                 case 1:
-                    Debug.Log(minersWife.Id + "Washin' the dishes");
+                    Debug.Log(minersWife.ID + "Washin' the dishes");
                     break;
                 case 2:
-                    Debug.Log(minersWife.Id + "Makin' the bed");
+                    Debug.Log(minersWife.ID + "Makin' the bed");
                     break;
                 default:
                     break;

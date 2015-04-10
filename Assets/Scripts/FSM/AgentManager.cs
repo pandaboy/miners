@@ -16,6 +16,7 @@ namespace FSM
 
         public static Agent GetAgent(int i)
         {
+            Debug.Log("GET AGENT " + i + " OF " + agents.Count + " agents");
             return agents[i];
         }
 

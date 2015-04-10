@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
         },
 		{
             TileType.Wall, TileType.Grass, TileType.Grass, TileType.Wall, TileType.Wall,
-            TileType.Grass, TileType.Wall, TileType.Grass, TileType.Grass, TileType.Wall
+            TileType.Wall, TileType.Wall, TileType.Grass, TileType.Grass, TileType.Wall
         },
 		{
             TileType.Wall, TileType.Grass, TileType.Grass, TileType.Wall, TileType.Grass,

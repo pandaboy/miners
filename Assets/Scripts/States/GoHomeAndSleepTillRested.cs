@@ -11,22 +11,22 @@ namespace States
     {
         public override void Enter(Miner miner)
         {
-            Debug.Log(miner.Id + "Walkin' Home");
+            Debug.Log(miner.ID + "Walkin' Home");
             miner.MinerLocation = Location.home;
-            Message.Dispatch(0, miner.Id, miner.WifeId, MessageType.HiHoneyImHome);
+            Message.Dispatch(0, miner.ID, miner.WifeID, MessageType.HiHoneyImHome);
         }
 
         public override void Execute(Miner miner)
         {
             if (miner.HowFatigued < miner.TirednessThreshold)
             {
-                Debug.Log(miner.Id + "All mah fatigue has drained away. Time to find more gold!");
+                Debug.Log(miner.ID + "All mah fatigue has drained away. Time to find more gold!");
                 miner.StateMachine.ChangeState(new EnterMineAndDigForNugget());
             }
             else
             {
                 miner.HowFatigued--;
-                Debug.Log(miner.Id + "ZZZZZ....");
+                Debug.Log(miner.ID + "ZZZZZ....");
             }
         }
 
@@ -42,8 +42,8 @@ namespace States
                 case MessageType.HiHoneyImHome:
                     return false;
                 case MessageType.StewsReady:
-                    Debug.Log("Message handled by " + miner.Id + " at time ");
-                    Debug.Log(miner.Id + "Okay Hun, ahm a comin'!");
+                    Debug.Log("Message handled by " + miner.ID + " at time ");
+                    Debug.Log(miner.ID + "Okay Hun, ahm a comin'!");
                     miner.StateMachine.ChangeState(new EatStew());
                     return true;
                 default:

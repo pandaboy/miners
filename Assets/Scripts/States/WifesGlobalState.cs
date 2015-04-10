@@ -32,8 +32,8 @@ namespace States
             switch (telegram.messageType)
             {
                 case MessageType.HiHoneyImHome:
-                    Debug.Log("Message handled by " + minersWife.Id + " at time ");
-                    Debug.Log(minersWife.Id + "Hi honey. Let me make you some of mah fine country stew");
+                    Debug.Log("Message handled by " + minersWife.ID + " at time ");
+                    Debug.Log(minersWife.ID + "Hi honey. Let me make you some of mah fine country stew");
                     minersWife.StateMachine.ChangeState(new CookStew());
                     return true;
                 case MessageType.StewsReady:

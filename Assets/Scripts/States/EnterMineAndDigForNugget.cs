@@ -9,7 +9,7 @@ namespace States
     {
         public override void Enter(Miner miner)
         {
-            Debug.Log(miner.Id + "Walkin' to the goldmine");
+            Debug.Log(miner.ID + "Walkin' to the goldmine");
             miner.MinerLocation = Location.mine;
         }
 
@@ -17,7 +17,7 @@ namespace States
         {
             miner.GoldCarrying += 1;
             miner.HowFatigued += 1;
-            Debug.Log(miner.Id + "Pickin' up a nugget");
+            Debug.Log(miner.ID + "Pickin' up a nugget");
             
             if (miner.PocketsFull()) {
                 miner.StateMachine.ChangeState(new VisitBankAndDepositGold());
@@ -30,7 +30,7 @@ namespace States
 
         public override void Exit(Miner miner)
         {
-            Debug.Log(miner.Id + "Ah'm leaving the gold mine with mah pockets full o' sweet gold");
+            Debug.Log(miner.ID + "Ah'm leaving the gold mine with mah pockets full o' sweet gold");
         }
 
         public override bool OnMessage(Miner agent, Telegram telegram)

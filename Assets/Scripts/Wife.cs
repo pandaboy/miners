@@ -14,7 +14,7 @@ public class Wife : Agent
     }
 
     private int husbandId;
-    public int HusbandId
+    public int HusbandID
     {
         get { return husbandId; }
         set { husbandId = value; }
@@ -34,13 +34,18 @@ public class Wife : Agent
         set { cooking = value; }
     }
 
-    public Wife()
-        : base()
+    public Wife() : base()
     {
         stateMachine = new StateMachine<Wife>(this);
         stateMachine.CurrentState = new DoHouseWork();
         stateMachine.GlobalState = new WifesGlobalState();
-        husbandId = this.Id - 1;
+        husbandId = this.ID - 1;
+    }
+
+    public void Awake()
+    {
+        //this.ID = 2;
+        //husbandId = 1;
     }
 
     public override void Update()

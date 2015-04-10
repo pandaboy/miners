@@ -18,7 +18,7 @@ public class Miner : Agent {
     }
 
     private int wifeId;
-    public int WifeId
+    public int WifeID
     {
         get { return wifeId; }
         set { wifeId = value; }
@@ -64,7 +64,13 @@ public class Miner : Agent {
         stateMachine = new StateMachine<Miner>(this);
         stateMachine.CurrentState = new GoHomeAndSleepTillRested();
         stateMachine.GlobalState = new MinerGlobalState();
-        wifeId = this.Id + 1;
+        wifeId = this.ID + 1;
+    }
+
+    public void Awake()
+    {
+        //this.ID = 1;
+        //wifeId = 2;
     }
 
     public override void Update()
