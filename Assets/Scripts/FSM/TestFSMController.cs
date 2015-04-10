@@ -4,26 +4,24 @@ using FSM;
 
 public class TestFSMController : MonoBehaviour {
 
-    public Miner bob;
-    public Wife elsa;
+    // prefabs for the characters
+    public GameObject miner_prefab;
+    public GameObject wife_prefab;
 
 	// Use this for initialization
 	void Start () {
-        bob = new Miner();
-        elsa = new Wife();
+        GameObject miner = (GameObject)Instantiate(miner_prefab, new Vector3(0, 1.2f, 0), Quaternion.identity);
+        miner.GetComponent<Character>().agent = new Miner();
+        AgentManager.AddAgent(miner.GetComponent<Character>().agent);
 
-        AgentManager.AddAgent(bob);
-        AgentManager.AddAgent(elsa);
-
-        AgentManager.GetAgent(0);
-        AgentManager.GetAgent(1);
+        GameObject wife = (GameObject)Instantiate(wife_prefab, new Vector3(0, 1.2f, 0), Quaternion.identity) as GameObject;
+        wife.GetComponent<Character>().agent = new Wife();
+        AgentManager.AddAgent(wife.GetComponent<Character>().agent);
 	}
 	
 	// Update is called once per frame
     void Update()
     {
-        bob.Update();
-        elsa.Update();
         Message.SendDelayed();
 	}
 }

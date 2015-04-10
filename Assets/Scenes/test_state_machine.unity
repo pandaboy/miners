@@ -114,8 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c7fb6b75f54454daa51364cc7c2d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bob: {fileID: 0}
-  elsa: {fileID: 0}
+  miner_prefab: {fileID: 118678, guid: d342eed797b0add479557b3f2dbd2c0c, type: 2}
+  wife_prefab: {fileID: 121158, guid: d628036068efd3947bd7b2a5ce022bd1, type: 2}
 --- !u!4 &45733767
 Transform:
   m_ObjectHideFlags: 0
