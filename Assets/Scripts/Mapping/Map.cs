@@ -45,6 +45,15 @@ namespace Mapping
             }
         }
 
+        public Tile WhatTile(Vector3 pos)
+        {
+            // basic hack to get location
+            int x = (int)Math.Round(pos.x / 10);
+            int z = (int)Math.Round(pos.z / 10);
+
+            return GetTile(x, z);
+        }
+
         public Tile GetTile(int x, int y)
         {
             return tiles[x, y];

@@ -2,6 +2,7 @@
 using System.Collections;
 using FSM;
 using FSM.States;
+using Mapping;
 
 public class Miner : Agent {
 
@@ -29,6 +30,13 @@ public class Miner : Agent {
     {
         get { return location; }
         set { location = value; }
+    }
+
+    private TileType tileType;
+    public TileType TileLocation
+    {
+        get { return tileType; }
+        set { tileType = value; }
     }
 
     private int goldCarrying;

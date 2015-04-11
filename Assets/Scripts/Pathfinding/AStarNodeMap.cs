@@ -31,7 +31,7 @@ namespace Pathfinding
             //int currentCost = MainClass.GetMap(ax, ay);
             int currentCost = 1;
             //int currentCost = GameObject.FindWithTag("GameController").Map.GetTileCost(ax,ay);
-            currentCost = GameController.map.GetTileCost(ax, ay);
+            currentCost = GameController.map.GetTile(ax, ay).cost;
             if (currentCost == -1)
             {
                 return;
@@ -95,7 +95,7 @@ namespace Pathfinding
 
         public override void PrintNodeInfo()
         {
-            //Debug.Log("X:\t{0}\tY:\t{1}\tCost:\t{2}\tEst:\t{3}\tTotal:\t{4}", x, y, Cost, GoalEstimate, TotalCost);
+            //Debug.Log("X:" + x + ", Y:" + y + ", Cost: " + Cost + ", Estimate: " + GoalEstimate + ", Total: " + TotalCost);
         }
     }
 }

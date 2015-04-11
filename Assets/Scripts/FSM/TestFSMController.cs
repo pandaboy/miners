@@ -8,7 +8,6 @@ public class TestFSMController : MonoBehaviour {
     // prefabs for the characters
     public GameObject miner_prefab;
     public GameObject wife_prefab;
-    public GameObject dummy_prefab;
 
     // basic map to test FSM based movement and state switching
     public static TileType[,] map_data = {

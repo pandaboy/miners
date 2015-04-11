@@ -11,6 +11,11 @@ public class Character : MonoBehaviour
     public float speed = 1f;
 
     private bool in_motion = false;
+    public bool InMotion
+    {
+        get { return in_motion; }
+        set { in_motion = value; }
+    }
 
     // where the agent should go to next
     private Vector3 objective;
@@ -30,7 +35,11 @@ public class Character : MonoBehaviour
     void Update()
     {
         // update the Finite State Machine
-        agent.Update();
+        // when the character isn't moving.
+        if (!InMotion)
+        {
+            agent.Update();
+        }
     }
 
     void FixedUpdate()
