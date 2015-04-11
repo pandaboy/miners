@@ -158,6 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   miner_prefab: {fileID: 118678, guid: d342eed797b0add479557b3f2dbd2c0c, type: 2}
   wife_prefab: {fileID: 121158, guid: d628036068efd3947bd7b2a5ce022bd1, type: 2}
+  miner_spawn: {x: 5, y: 1.20000005, z: 5}
 --- !u!4 &1876172763
 Transform:
   m_ObjectHideFlags: 0

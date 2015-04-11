@@ -56,37 +56,21 @@ public class Character : MonoBehaviour
             // update the Finite State Machine
             agent.Update();
 
-            // Debug.Log("I'm currently at: " + agent.CurrentTile + ", my next location is: " + agent.NextTile);
+            // Debug.Log("I'm currently at: " + agent.CurrentTile + ", my next location is: " + agent.DestinationTile);
 
-            // are we moving yet? - check if we have a different NextTile to our CurrentTile
-            if (agent.CurrentTile != agent.NextTile)
+            // are we moving yet? - check if we have a different DestinationTile to our CurrentTile
+            if (agent.CurrentTile != agent.DestinationTile)
             {
-                // set the goal to the agents next_tile
-                Tile next_tile;
-                map.FindTile(agent.NextTile, out next_tile);
-                /*
-                a_goal_node = new AStarNodeMap(null, null, 0, next_tile.x, next_tile.y);
+                // calculate the path to the next tile
+                //DeterminePath();
 
-                // set the starting point to the current location
-                a_start_node = new AStarNodeMap(null, a_goal_node, 0, current_tile.x, current_tile.y);
-                map.SetTileColor(current_tile.x, current_tile.y, Color.white);
-
-                a_start_node.GoalNode = a_goal_node;
-
-                // find a path to the goal
-                a_star.FindPath(a_start_node, a_goal_node);
-                */
+                // display the path on the map
+                //RenderPath(Color.red);
 
                 // tell the agent to move to the next Tile
                 GoToTile();
             }
         }
-    }
-
-    // returns the path determined by the AStar code.
-    public ArrayList GetPath()
-    {
-        return a_star.Solution;
     }
 
     void FixedUpdate()
@@ -117,13 +101,63 @@ public class Character : MonoBehaviour
     public void GoToTile()
     {
         Tile tmp = new Tile();
-        
-        map.FindTile(agent.NextTile, out tmp);
+
+        map.FindTile(agent.DestinationTile, out tmp);
         
         Objective = new Vector3(
             tmp.obj.transform.position.x,
             1.2f,
             tmp.obj.transform.position.z
         );
+    }
+
+    // returns the path determined by the AStar code.
+    public ArrayList GetPath()
+    {
+        return a_star.Solution;
+    }
+
+    void DeterminePath()
+    {
+        // set the goal to the agents DestinationTile
+        Tile destination_tile;
+        map.FindTile(agent.DestinationTile, out destination_tile);
+
+        // Goal to find a path to destination
+        a_goal_node = new AStarNodeMap(null, null, 0, destination_tile.x, destination_tile.y);
+        
+        // set the starting point to the current location
+        a_start_node = new AStarNodeMap(null, a_goal_node, 0, current_tile.x, current_tile.y);
+
+        a_start_node.GoalNode = a_goal_node;
+
+        // find a path to the goal
+        a_star.FindPath(a_start_node, a_goal_node);
+        
+    }
+
+    void RenderPath(Color color)
+    {
+        ArrayList ASolution = a_star.Solution;
+
+        for (int i = 0; i < map.Length; i++)
+        {
+            for (int j = 0; j < map.Width; j++)
+            {
+                bool solution = false;
+                foreach (AStarNodeMap n in ASolution)
+                {
+                    AStarNodeMap tmp = new AStarNodeMap(null, null, 0, i, j);
+                    solution = n.IsSameState(tmp);
+                    if (solution)
+                        break;
+                }
+
+                if (solution)
+                {
+                    map.SetTileColor(i, j, color);
+                }
+            }
+        }
     }
 }

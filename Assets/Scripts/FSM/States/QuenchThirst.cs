@@ -17,10 +17,10 @@ namespace FSM.States
                 miner.MinerLocation = Location.pub;
             }
 
-            if(miner.NextTile != TileType.Pub)
+            if (miner.DestinationTile != TileType.Pub)
             {
                 Debug.Log(miner.ID + "Boy, ah sure is thusty! Walking to the saloon");
-                miner.NextTile = TileType.Pub;
+                miner.DestinationTile = TileType.Pub;
             }
         }
 

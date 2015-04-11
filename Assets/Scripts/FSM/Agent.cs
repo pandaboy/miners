@@ -30,6 +30,13 @@ namespace FSM
             set { nextTile = value; }
         }
 
+        private TileType destTile;
+        public TileType DestinationTile
+        {
+            get { return destTile; }
+            set { destTile = value; }
+        }
+
         public Agent() : base()
         {
             id = nAgents++;
