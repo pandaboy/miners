@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using Mapping;
 
 namespace FSM
 {
@@ -13,6 +14,20 @@ namespace FSM
         {
             get { return id; }
             set { id = value; }
+        }
+
+        private TileType currentTile;
+        public TileType CurrentTile
+        {
+            get { return currentTile; }
+            set { currentTile = value; }
+        }
+
+        private TileType nextTile;
+        public TileType NextTile
+        {
+            get { return nextTile; }
+            set { nextTile = value; }
         }
 
         public Agent() : base()

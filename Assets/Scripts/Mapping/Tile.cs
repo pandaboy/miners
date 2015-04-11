@@ -23,6 +23,9 @@ namespace Mapping
         public GameObject obj;
         public int cost;
 
+        public int x;
+        public int y;
+
         public static int GetCost(TileType tileType)
         {
             switch (tileType)

@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using FSM;
+using Mapping;
 
 namespace FSM.States
 {
@@ -14,6 +15,12 @@ namespace FSM.States
             {
                 Debug.Log(miner.ID + "Boy, ah sure is thusty! Walking to the saloon");
                 miner.MinerLocation = Location.pub;
+            }
+
+            if(miner.NextTile != TileType.Pub)
+            {
+                Debug.Log(miner.ID + "Boy, ah sure is thusty! Walking to the saloon");
+                miner.NextTile = TileType.Pub;
             }
         }
 

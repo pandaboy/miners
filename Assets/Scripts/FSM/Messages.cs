@@ -33,7 +33,7 @@ namespace FSM
 
         public static void Dispatch(double delay, int sender, int receiver, MessageType messageType)
         {
-            Agent sendingAgent = AgentManager.GetAgent(sender);
+            //Agent sendingAgent = AgentManager.GetAgent(sender);
             Agent receivingAgent = AgentManager.GetAgent(receiver);
 
             Telegram telegram = new Telegram(0, sender, receiver, messageType);

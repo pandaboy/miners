@@ -32,13 +32,6 @@ public class Miner : Agent {
         set { location = value; }
     }
 
-    private TileType tileType;
-    public TileType TileLocation
-    {
-        get { return tileType; }
-        set { tileType = value; }
-    }
-
     private int goldCarrying;
     public int GoldCarrying
     {
@@ -73,12 +66,6 @@ public class Miner : Agent {
         stateMachine.CurrentState = new GoHomeAndSleepTillRested();
         stateMachine.GlobalState = new MinerGlobalState();
         wifeId = this.ID + 1;
-    }
-
-    public void Awake()
-    {
-        //this.ID = 1;
-        //wifeId = 2;
     }
 
     public override void Update()

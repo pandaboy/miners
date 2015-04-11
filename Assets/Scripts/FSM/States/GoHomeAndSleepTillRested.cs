@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using FSM;
+using Mapping;
 
 namespace FSM.States
 {
@@ -12,6 +13,7 @@ namespace FSM.States
         {
             Debug.Log(miner.ID + "Walkin' Home");
             miner.MinerLocation = Location.home;
+            miner.NextTile = TileType.Home;
             Message.Dispatch(0, miner.ID, miner.WifeID, MessageType.HiHoneyImHome);
         }
 

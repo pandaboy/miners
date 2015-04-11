@@ -118,6 +118,8 @@ namespace Mapping
             tiles[x, y].type = tileType;
             tiles[x, y].cost = Tile.GetCost(tileType);
             tiles[x, y].obj = tilePlane;
+            tiles[x, y].x = x;
+            tiles[x, y].y = y;
         }
     }
 }

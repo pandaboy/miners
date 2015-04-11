@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using FSM;
 using FSM.States;
+using Mapping;
 
 public class Wife : Agent
 {
@@ -21,7 +22,7 @@ public class Wife : Agent
     }
 
     private Location location;
-    public Location MinerLocation
+    public Location WifeLocation
     {
         get { return location; }
         set { location = value; }
@@ -40,12 +41,6 @@ public class Wife : Agent
         stateMachine.CurrentState = new DoHouseWork();
         stateMachine.GlobalState = new WifesGlobalState();
         husbandId = this.ID - 1;
-    }
-
-    public void Awake()
-    {
-        //this.ID = 2;
-        //husbandId = 1;
     }
 
     public override void Update()

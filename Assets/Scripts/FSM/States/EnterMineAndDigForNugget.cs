@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using FSM;
+using Mapping;
 
 namespace FSM.States
 {
@@ -11,6 +12,7 @@ namespace FSM.States
         {
             Debug.Log(miner.ID + "Walkin' to the goldmine");
             miner.MinerLocation = Location.mine;
+            miner.NextTile = TileType.Mine;
         }
 
         public override void Execute(Miner miner)
