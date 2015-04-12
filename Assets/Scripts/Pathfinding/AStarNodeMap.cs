@@ -1,4 +1,5 @@
-﻿using System;
+﻿using UnityEngine;
+using System;
 using System.Collections;
 
 namespace Pathfinding
@@ -28,10 +29,22 @@ namespace Pathfinding
 
         private void AddSuccessor(ArrayList a_successors, int ax, int ay)
         {
-            //int currentCost = MainClass.GetMap(ax, ay);
+            Mapping.Map map = GameController.map;
+
             int currentCost = 1;
-            //int currentCost = GameObject.FindWithTag("GameController").Map.GetTileCost(ax,ay);
-            currentCost = GameController.map.GetTile(ax, ay).cost;
+            
+            if ((ax < 0) || (ax > map.Length))
+            {
+                currentCost = (-1);
+            } else if ((ay < 0) || (ay > map.Width))
+            {
+                currentCost = (-1);
+            }
+            else
+            {
+                currentCost = map.GetTileCost(ax, ay);
+            }
+
             if (currentCost == -1)
             {
                 return;
@@ -64,14 +77,12 @@ namespace Pathfinding
                 double y_dist = y - ((AStarNodeMap)GoalNode).Y;
 
                 // "Euclidean distance" - Used when search can move at any angle.
-                //GoalEstimate = Math.Sqrt((x_dist * x_dist) + (y_dist * y_dist));
+                // GoalEstimate = Math.Sqrt((x_dist * x_dist) + (y_dist * y_dist));
 
-                // "Manhattan Distance" - Used when search can only move vertically and 
-                // horizontally.
-                //GoalEstimate = Math.Abs(x_dist) + Math.Abs(y_dist); 
+                // "Manhattan Distance" - Used when search can only move vertically and horizontally.
+                // GoalEstimate = Math.Abs(x_dist) + Math.Abs(y_dist); 
 
                 // "Diagonal Distance" - Used when the search can move in 8 directions.
-
                 GoalEstimate = Math.Max(Math.Abs(x_dist), Math.Abs(y_dist));
             }
             else
@@ -83,6 +94,7 @@ namespace Pathfinding
         public override void GetSuccessors(ArrayList a_successors)
         {
             a_successors.Clear();
+
             AddSuccessor(a_successors, x - 1, y);
             AddSuccessor(a_successors, x - 1, y - 1);
             AddSuccessor(a_successors, x, y - 1);

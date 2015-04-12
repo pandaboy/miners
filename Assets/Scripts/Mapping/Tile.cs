@@ -31,7 +31,7 @@ namespace Mapping
             switch (tileType)
             {
                 case TileType.Grass: return 1;
-                case TileType.Tree: return -1;
+                case TileType.Tree: return 1;
                 case TileType.Wall: return -1;
                 case TileType.Home: return 0;
                 case TileType.Bank: return 0;
@@ -47,12 +47,12 @@ namespace Mapping
             switch (tileType)
             {
                 case TileType.Grass: return Color.green;
-                case TileType.Tree: return Color.black;
+                case TileType.Tree: return Color.green;
                 case TileType.Wall: return Color.black;
-                case TileType.Home: return Color.blue;
+                case TileType.Home: return Color.yellow;
                 case TileType.Bank: return Color.blue;
-                case TileType.Pub: return Color.blue;
-                case TileType.Mine: return Color.blue;
+                case TileType.Pub: return Color.magenta;
+                case TileType.Mine: return Color.white;
             }
 
             return Color.gray;

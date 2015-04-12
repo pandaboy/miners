@@ -12,7 +12,7 @@ namespace FSM.States
         public override void Enter(Miner miner)
         {
             Debug.Log(miner.ID + "Walkin' Home");
-            miner.MinerLocation = Location.home;
+            //miner.MinerLocation = Location.home;
             miner.DestinationTile = TileType.Home;
             Message.Dispatch(0, miner.ID, miner.WifeID, MessageType.HiHoneyImHome);
         }

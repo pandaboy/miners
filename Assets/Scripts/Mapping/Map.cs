@@ -43,6 +43,8 @@ namespace Mapping
                     BuildTile(i, j, data[i, j]);
                 }
             }
+
+            ColorMap();
         }
 
         public Tile WhatTile(Vector3 pos)
@@ -109,7 +111,6 @@ namespace Mapping
                 0,
                 y * 10
             );
-            tilePlane.GetComponent<Renderer>().material.color = Tile.GetColor(tileType);
 
             // grouped to tile_group
             tilePlane.transform.parent = tile_group.transform;
@@ -120,6 +121,18 @@ namespace Mapping
             tiles[x, y].obj = tilePlane;
             tiles[x, y].x = x;
             tiles[x, y].y = y;
+        }
+
+        public void ColorMap()
+        {
+            for (int i = 0; i < Length; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    tiles[i, j].obj.GetComponent<Renderer>().material.color 
+                        = Tile.GetColor(tiles[i, j].type);
+                }
+            }
         }
     }
 }
