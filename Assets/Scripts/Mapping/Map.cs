@@ -6,6 +6,8 @@ namespace Mapping
 {
     public class Map
     {
+        private GameObject barrier_prefab;
+
         private Tile[,] tiles;
         private GameObject tile_group;
 
@@ -23,8 +25,10 @@ namespace Mapping
             set { width = value; }
         }
 
-        public Map(TileType[,] data)
+        public Map(TileType[,] data, GameObject prefab)
         {
+            barrier_prefab = prefab;
+
             // store dimensions based on array given.
             length = data.GetLength(0);
             width = data.GetLength(1);
@@ -121,6 +125,19 @@ namespace Mapping
             tiles[x, y].obj = tilePlane;
             tiles[x, y].x = x;
             tiles[x, y].y = y;
+
+            // Place a prop
+            switch (tileType)
+            {
+                case TileType.Wall:
+                    GameObject prop = GameObject.Instantiate(barrier_prefab);
+                    prop.transform.position = new Vector3(
+                        x * 10,
+                        2,
+                        y * 10
+                    );
+                    break;
+            }
         }
 
         public void ColorMap()

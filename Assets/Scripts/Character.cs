@@ -225,10 +225,10 @@ public class Character : MonoBehaviour
 
         // set the goal to the agents DestinationTile
         Tile destination_tile, start_tile;
-        map.FindTile(agent.DestinationTile, out destination_tile);
-        //map.FindTile(TileType.Bank, out destination_tile);
-        map.FindTile(agent.CurrentTile, out start_tile);
-        //map.FindTile(TileType.Pub, out start_tile);
+        //map.FindTile(agent.DestinationTile, out destination_tile);
+        map.FindTile(TileType.Bank, out destination_tile);
+        //map.FindTile(agent.CurrentTile, out start_tile);
+        map.FindTile(TileType.Pub, out start_tile);
 
         // Goal to find a path to destination
         a_goal_node = new AStarNodeMap(null, null, 0, destination_tile.x, destination_tile.y);

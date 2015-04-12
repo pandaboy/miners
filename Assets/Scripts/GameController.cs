@@ -11,6 +11,9 @@ public class GameController : MonoBehaviour
     public GameObject miner_prefab;
     public GameObject wife_prefab;
 
+    // assets
+    public GameObject barrier_prefab;
+
     // used to move the camera
     public GameObject miner_camera;
 
@@ -72,7 +75,7 @@ public class GameController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        map = new Map(map_data);
+        map = new Map(map_data, barrier_prefab);
 
         miner = (GameObject)Instantiate(miner_prefab, miner_spawn, Quaternion.identity);
         miner.GetComponent<Character>().agent = new Miner();
