@@ -13,6 +13,10 @@ public class GameController : MonoBehaviour
 
     // assets
     public GameObject barrier_prefab;
+    public GameObject home_prefab;
+    public GameObject bank_prefab;
+    public GameObject pub_prefab;
+    public GameObject mine_prefab;
 
     // used to move the camera
     public GameObject miner_camera;
@@ -75,11 +79,11 @@ public class GameController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        map = new Map(map_data, barrier_prefab);
+        map = new Map(map_data, barrier_prefab, home_prefab, bank_prefab, pub_prefab, mine_prefab);
 
         miner = (GameObject)Instantiate(miner_prefab, miner_spawn, Quaternion.identity);
         miner.GetComponent<Character>().agent = new Miner();
-        miner.GetComponent<Character>().agent.DestinationTile = TileType.Home;
+        miner.GetComponent<Character>().agent.DestinationTile = TileType.Bank;
         miner.GetComponent<Character>().ShowPath = true;
         AgentManager.AddAgent(miner.GetComponent<Character>().agent);
 
@@ -89,12 +93,22 @@ public class GameController : MonoBehaviour
         wife.GetComponent<Renderer>().material.color = Color.yellow;
         wife.GetComponent<Character>().path_color = Color.yellow;
         AgentManager.AddAgent(wife.GetComponent<Character>().agent);
+
+        // Other miners (supporting cast)
+        for (int i = 0; i < 2; i++)
+        {
+            GameObject tmp = (GameObject)Instantiate(miner_prefab, new Vector3(i + 2, 1.2f, i + 4), Quaternion.identity);
+            tmp.GetComponent<Character>().agent = new Miner();
+            tmp.GetComponent<Character>().agent.DestinationTile = TileType.Mine;
+            tmp.GetComponent<Character>().ShowPath = true;
+            AgentManager.AddAgent(tmp.GetComponent<Character>().agent);
+        }
 	}
 	
 	// Update is called once per frame
     void Update()
     {
-        miner.GetComponent<Character>().PrintInfo();
+        // miner.GetComponent<Character>().PrintInfo();
 
         miner_camera.transform.LookAt(miner.transform);
 

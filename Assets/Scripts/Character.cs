@@ -73,8 +73,6 @@ public class Character : MonoBehaviour
         // fetch the map
         map = GameController.map;
 
-        //Debug.Log(agent.DestinationTile);
-        //agent.CurrentTile = agent.DestinationTile;
         agent.Update();
         DeterminePath();
     }
@@ -96,21 +94,15 @@ public class Character : MonoBehaviour
             path.Clear();
             path_step = 0;
 
-            // calculate the path to the destination
-            //if (agent.CurrentTile != agent.DestinationTile)
-            //{
-                DeterminePath();
-                at_destination = false;
-            //}
-
-            //GoToNextInPath();
+            DeterminePath();
+            at_destination = false;
         }
 
         // stuff to do when the character isn't moving and hasn't reached the destination
         if (!InMotion && !AtDestination)
         {
-            GoToNext();
-            //GoToTile();
+            GoToNext();     // Goes to Destination by iteratively stepping through the data returned.
+            //GoToTile();   // Goes directly to Destination, ignores A* Path
         }
     }
 
@@ -164,17 +156,6 @@ public class Character : MonoBehaviour
             Tile nextTile = map.GetTile(next.X, next.Y);
             agent.NextTile = nextTile.type;
 
-            /*
-            // Update the agent objective.
-            objective = nextTile.obj.transform.position;
-            nextTile.obj.transform.Translate(
-                objective.x,
-                1.2f,
-                objective.z
-            );
-            Debug.Log(objective);
-            Objective = objective;
-            */
             Objective = new Vector3(
                 nextTile.obj.transform.position.x,
                 1.2f,
@@ -190,45 +171,16 @@ public class Character : MonoBehaviour
         }
     }
 
-    // returns the path determined by the AStar code.
-    public void GoToNextInPath()
-    {
-        Tile curr = new Tile();
-        Tile nex = new Tile();
-
-        map.FindTile(agent.CurrentTile, out curr);
-        // map.FindTile(agent.NextTile, out nex);
-
-        //Debug.Log(curr.x + ":" + nex.x + ", " + curr.y + ":" + nex.y);
-
-        if (curr.x == nex.x && curr.y == nex.y && path_step < path.Count)
-        {
-            //Debug.Log("Need to Switch");
-            AStarNodeMap next = (AStarNodeMap)path[path_step];
-            agent.NextTile = map.GetTile(next.X, next.Y).type;
-
-            PathStep++;
-        }
-
-        //Debug.Log("Next: " + agent.NextTile);
-
-        Objective = new Vector3(
-            nex.obj.transform.position.x,
-            1.2f,
-            nex.obj.transform.position.z
-        );
-    }
-
     void DeterminePath()
     {
         //agent.NextTile = agent.CurrentTile;
 
         // set the goal to the agents DestinationTile
         Tile destination_tile, start_tile;
-        //map.FindTile(agent.DestinationTile, out destination_tile);
-        map.FindTile(TileType.Bank, out destination_tile);
-        //map.FindTile(agent.CurrentTile, out start_tile);
-        map.FindTile(TileType.Pub, out start_tile);
+        map.FindTile(agent.DestinationTile, out destination_tile);
+        //map.FindTile(TileType.Bank, out destination_tile);
+        map.FindTile(agent.CurrentTile, out start_tile);
+        //map.FindTile(TileType.Pub, out start_tile);
 
         // Goal to find a path to destination
         a_goal_node = new AStarNodeMap(null, null, 0, destination_tile.x, destination_tile.y);
@@ -244,6 +196,7 @@ public class Character : MonoBehaviour
         // store the path in a local var
         path = a_star.Solution;
 
+        // optionally render the path ahead
         if (ShowPath)
         {
             RenderPath(path_color);
@@ -252,6 +205,7 @@ public class Character : MonoBehaviour
 
     public void RenderPath(Color color)
     {
+        // set map colors.
         map.ColorMap();
 
         ArrayList ASolution = a_star.Solution;

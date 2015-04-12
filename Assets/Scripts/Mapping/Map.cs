@@ -7,6 +7,10 @@ namespace Mapping
     public class Map
     {
         private GameObject barrier_prefab;
+        private GameObject home_prefab;
+        private GameObject bank_prefab;
+        private GameObject pub_prefab;
+        private GameObject mine_prefab;
 
         private Tile[,] tiles;
         private GameObject tile_group;
@@ -25,9 +29,13 @@ namespace Mapping
             set { width = value; }
         }
 
-        public Map(TileType[,] data, GameObject prefab)
+        public Map(TileType[,] data, GameObject barrier, GameObject home, GameObject bank, GameObject pub, GameObject mine)
         {
-            barrier_prefab = prefab;
+            barrier_prefab = barrier;
+            home_prefab = home;
+            bank_prefab = bank;
+            pub_prefab = pub;
+            mine_prefab = mine;
 
             // store dimensions based on array given.
             length = data.GetLength(0);
@@ -116,9 +124,6 @@ namespace Mapping
                 y * 10
             );
 
-            // grouped to tile_group
-            tilePlane.transform.parent = tile_group.transform;
-
             // update the tile array data
             tiles[x, y].type = tileType;
             tiles[x, y].cost = Tile.GetCost(tileType);
@@ -127,16 +132,57 @@ namespace Mapping
             tiles[x, y].y = y;
 
             // Place a prop
+            GameObject prop = null;
+
             switch (tileType)
             {
                 case TileType.Wall:
-                    GameObject prop = GameObject.Instantiate(barrier_prefab);
+                    prop = GameObject.Instantiate(barrier_prefab);
                     prop.transform.position = new Vector3(
                         x * 10,
                         2,
                         y * 10
                     );
                     break;
+                case TileType.Home:
+                    prop = GameObject.Instantiate(home_prefab);
+                    prop.transform.position = new Vector3(
+                        x * 10,
+                        4,
+                        y * 10
+                    );
+                    break;
+                case TileType.Bank:
+                    prop = GameObject.Instantiate(bank_prefab);
+                    prop.transform.position = new Vector3(
+                        x * 10,
+                        0,
+                        y * 10
+                    );
+                    break;
+                case TileType.Pub:
+                    prop = GameObject.Instantiate(pub_prefab);
+                    prop.transform.position = new Vector3(
+                        x * 10,
+                        2.5f,
+                        y * 10
+                    );
+                    break;
+                case TileType.Mine:
+                    prop = GameObject.Instantiate(mine_prefab);
+                    prop.transform.position = new Vector3(
+                        x * 10,
+                        -3.5f,
+                        y * 10
+                    );
+                    break;
+            }
+
+            // grouped to tile_group to not clutter the hierarchy
+            tilePlane.transform.parent = tile_group.transform;
+            if (prop)
+            {
+                prop.transform.parent = tile_group.transform;
             }
         }
 

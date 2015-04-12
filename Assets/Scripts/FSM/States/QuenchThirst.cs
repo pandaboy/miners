@@ -11,12 +11,6 @@ namespace FSM.States
     {
         public override void Enter(Miner miner)
         {
-            if (miner.MinerLocation != Location.pub)
-            {
-                Debug.Log(miner.ID + "Boy, ah sure is thusty! Walking to the saloon");
-                miner.MinerLocation = Location.pub;
-            }
-
             if (miner.DestinationTile != TileType.Pub)
             {
                 Debug.Log(miner.ID + "Boy, ah sure is thusty! Walking to the saloon");

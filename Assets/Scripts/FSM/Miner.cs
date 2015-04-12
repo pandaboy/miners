@@ -25,13 +25,6 @@ public class Miner : Agent {
         set { wifeId = value; }
     }
 
-    private Location location;
-    public Location MinerLocation
-    {
-        get { return location; }
-        set { location = value; }
-    }
-
     private int goldCarrying;
     public int GoldCarrying
     {

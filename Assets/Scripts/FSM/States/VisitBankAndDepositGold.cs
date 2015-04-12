@@ -11,7 +11,6 @@ namespace FSM.States
         public override void Enter(Miner miner)
         {
             Debug.Log(miner.ID + "Goin' to the bank. Yes siree");
-            miner.MinerLocation = Location.bank;
             miner.DestinationTile = TileType.Bank;
         }
 

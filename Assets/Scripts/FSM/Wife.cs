@@ -21,13 +21,6 @@ public class Wife : Agent
         set { husbandId = value; }
     }
 
-    private Location location;
-    public Location WifeLocation
-    {
-        get { return location; }
-        set { location = value; }
-    }
-
     private Boolean cooking;
     public Boolean Cooking
     {
