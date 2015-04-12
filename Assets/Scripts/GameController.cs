@@ -97,10 +97,11 @@ public class GameController : MonoBehaviour
         // Other miners (supporting cast)
         for (int i = 0; i < 2; i++)
         {
-            GameObject tmp = (GameObject)Instantiate(miner_prefab, new Vector3(i + 2, 1.2f, i + 4), Quaternion.identity);
+            GameObject tmp = (GameObject)Instantiate(miner_prefab, new Vector3((i + 1) * 10, 1.2f, (i + 1) * 20), Quaternion.identity);
             tmp.GetComponent<Character>().agent = new Miner();
             tmp.GetComponent<Character>().agent.DestinationTile = TileType.Mine;
-            tmp.GetComponent<Character>().ShowPath = true;
+            tmp.GetComponent<Renderer>().material.color = Color.blue;
+            tmp.GetComponent<Character>().path_color = Color.blue;
             AgentManager.AddAgent(tmp.GetComponent<Character>().agent);
         }
 	}
